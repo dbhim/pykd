@@ -1,3 +1,4 @@
 [submodule "kdlibcpp"]
 	path = kdlibcpp
 	url = https://github.com/dbhim/kdlibcpp.git
+	branch = main

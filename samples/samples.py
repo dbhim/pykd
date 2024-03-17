@@ -5,14 +5,20 @@ import os.path
 from pykd import dprintln
 from pykd import dprint
 
+scriptPath = sys.argv[0]
+
+def printCommand(sampleDescription, sampleName):
+    dprintln( f'{sampleDescription} <link cmd="!pykd.py {scriptPath} run {sampleName}">Run</link> <link cmd="!pykd.py {scriptPath} source {sampleName}">Source</link>', True)
+
 def printAllSamples():
     dprintln( "<b>User mode</b>", True)
-    dprintln( "Get critical sections list <link cmd=\"!py samples run um.critlist\">Run</link> <link cmd=\"!py samples source um.critlist\">Source</link>", True)
-    dprintln( "Get module list from PEB <link cmd=\"!py samples run um.ldr\">Run</link> <link cmd=\"!py samples source um.ldr\">Source</link>", True)	
+    printCommand ("Get critical sections list", "um.critlist")
+    printCommand ("Get module list from PEB", "um.ldr")
+    #printCommand ("CreateFile", "um.createfile")
     dprintln( "<b>Kernel mode</b>", True )
-    dprintln( "Get process list <link cmd=\"!py samples run km.proclist\">Run</link> <link cmd=\"!py samples source km.proclist\">Source</link>", True)
-    dprintln( "Get kernel service list <link cmd=\"!py samples run km.ssdt\">Run</link> <link cmd=\"!py samples source km.ssdt\">Source</link>", True)
-    dprintln( "Get driver object <link cmd=\"!py samples run km.drvobj\">Run</link> <link cmd=\"!py samples source km.drvobj\">Source</link>", True)
+    printCommand ("Get process list", "km.proclist")
+    printCommand ("Get kernel service", "km.ssdt")
+    printCommand ("Get driver object", "km.drvobj")
     dprintln( "" )
 
 def runSample( sampleName ):
@@ -29,7 +35,7 @@ def runSample( sampleName ):
         pass
 
     dprintln( "" )
-    dprintln( "<link cmd=\"!py samples\">Sample list</link>", True )
+    dprintln( f'<link cmd="!pykd.py {scriptPath}">Sample list</link>', True )
     dprintln( "" )  
 
 def printSample( sampleName ):
@@ -37,7 +43,7 @@ def printSample( sampleName ):
     try:
         packageName, moduleName = sampleName.split(".")
 
-        module = __import__( name = sampleName, fromlist = moduleName  )
+        module = __import__( name = sampleName, fromlist = moduleName )
 
         fileName = os.path.dirname( module.__dict__["__file__"] )
         fileName = os.path.join( fileName, moduleName + ".py" )
@@ -51,7 +57,7 @@ def printSample( sampleName ):
         pass
 
     dprintln( "" )
-    dprintln( "<link cmd=\"!py samples\">Sample list</link>", True )
+    dprintln( f'<link cmd="!pykd.py {scriptPath}">Sample list</link>', True )
     dprintln( "" )  
   
 

@@ -8,7 +8,7 @@ def checkSSDT():
    if is64bitSystem():   
 
         def getServiceAddrWlh(Start, Offset):
-            return Start + (Offset / 16)
+            return Start + (Offset >> 4)
 
         def getServiceAddr2k3(Start, Offset):
             return Start + (Offset & ~0xf)
@@ -26,9 +26,9 @@ def checkSSDT():
 
         serviceTable = loadSignDWords( serviceTableStart, serviceCount ) 
 
-        for i in range( 0, serviceCount ):
+        for i in range( serviceCount ):
             routineAddress = getServiceAddr(serviceTableStart, serviceTable[i]);
-            dprintln( "[%u] " % i + findSymbol( routineAddress ) )
+            dprintln( "[%u] %s (%x)" % (i, findSymbol( routineAddress ), routineAddress) )
 
    else:
 

@@ -6,6 +6,7 @@ def loadSymbols():
    global nt
    nt = module( "nt" )
 
+
 def getObjNameFromObjHeader( objHeader ):
 
     if hasattr( objHeader, "NameInfoOffset"):
@@ -21,44 +22,70 @@ def getObjNameFromObjHeader( objHeader ):
 
         objName = nt.typedVar("_OBJECT_HEADER_NAME_INFO", objHeader.getAddress() - offsetNameInfo)
 
-    return loadUnicodeString( objName.Name.getAddress() )        
+    return loadUnicodeString( objName.Name.getAddress() )
+    
+    
+def getTypeObjectByObjectHeader (objHeader):
 
-def getObjTypeFromObjHeader( objHeader ):
+    # Надо дизассемблировать функцию nt!ObGetObjectType
+    if (ptrWord(nt.NtBuildNumber) < 10074):
+        index = objHeader.TypeIndex
+    else:
+        # Начиная с "Windows 10 Technical Preview Build 10074" индекс в заголовке обфусцируют
+        index = objHeader.TypeIndex ^ ((objHeader >> 8) & 0xFF) ^ ptrByte(nt.ObHeaderCookie)
 
-    if hasattr( objHeader, "Type"):
+    return ptrPtr( nt.ObTypeIndexTable + ptrSize() * index )
+
+
+def getObjTypeFromObjHeader (objHeader):
+
+    if hasattr (objHeader, "Type"):
         return objHeader.Type
 
-    return ptrPtr( nt.ObTypeIndexTable + ptrSize() * objHeader.TypeIndex )
+    return getTypeObjectByObjectHeader (objHeader)
+
+
+def isDirectory (obj):
+    
+    objHeader = containingRecord (obj, "nt!_OBJECT_HEADER", "Body")
+    return getObjTypeFromObjHeader (objHeader) == ptrPtr (nt.ObpDirectoryObjectType)
+
 
 def getObjectInDir( dirObj, objName ):
 
+    # print ("%x %s" % (dirObj, getObjNameFromObjHeader(containingRecord(dirObj, "nt!_OBJECT_HEADER", "Body"))))
     if objName.find( "\\" ) != -1:
         ( dirSubName, objSubName ) =  objName.split("\\", 1)
+        # print ("%s %s" % (dirSubName, objSubName))
     else:
         dirSubName = objName
+
  
     for i in range( 0, 37 ):
 
-       if dirObj.HashBuckets[i] != 0:
-          dirEntry = typedVar( "nt!_OBJECT_DIRECTORY_ENTRY", dirObj.HashBuckets[i] )
+        if dirObj.HashBuckets[i] != 0:
+            dirEntry = typedVar( "nt!_OBJECT_DIRECTORY_ENTRY", dirObj.HashBuckets[i] )
 
-          while dirEntry != 0:
+            while dirEntry != 0:
+              
+                curObj = dirEntry.Object
 
-            objHeader = containingRecord( dirEntry.Object, "nt!_OBJECT_HEADER", "Body" )
+                curObjHeader = containingRecord( curObj, "nt!_OBJECT_HEADER", "Body" )
 
-            objName = getObjNameFromObjHeader( objHeader )
+                curObjName = getObjNameFromObjHeader( curObjHeader )
+                # print ("%d %s" % (i, curObjName))
 
-            if objName.lower() == dirSubName.lower():
+                if curObjName.lower() == dirSubName.lower():
 
-                if getObjTypeFromObjHeader( objHeader ) == ptrPtr( nt.ObpDirectoryObjectType ):
-                    return getObjectInDir( typedVar( "nt!_OBJECT_DIRECTORY", dirEntry.Object), objSubName )
+                    if isDirectory(curObj):
+                        return getObjectInDir( typedVar( "nt!_OBJECT_DIRECTORY", curObj), objSubName )
+                    else:
+                        return curObj
+
+                if dirEntry.ChainLink != 0:
+                    dirEntry = typedVar( "nt!_OBJECT_DIRECTORY_ENTRY", dirEntry.ChainLink )
                 else:
-                    return dirEntry.Object
-
-            if dirEntry.ChainLink != 0:
-                dirEntry = typedVar( "nt!_OBJECT_DIRECTORY_ENTRY", dirEntry.ChainLink )
-            else:
-                dirEntry = 0    
+                    dirEntry = 0    
 
 
 def getObjectByName( objName ):
@@ -74,7 +101,6 @@ def getObjectByName( objName ):
     return getObjectInDir( rootDir, objName[1:] )
 
 
-
 def printDrvMajorTable( drvName ):
 
     objName = "\\Driver\\" + drvName
@@ -83,11 +109,14 @@ def printDrvMajorTable( drvName ):
     if drvObjPtr == None:
         dprintln( "object not found" )
         return
+        
+    print ("%s %x" % (objName, drvObjPtr))
  
     drvObj = typedVar( "nt!_DRIVER_OBJECT", drvObjPtr )
      
     for i in range( len(drvObj.MajorFunction) ):
         dprintln( "MajorFunction[%d] = %s" % ( i, findSymbol( drvObj.MajorFunction[i] ) ) )
+
 
 def run():
 
@@ -103,6 +132,7 @@ def run():
     loadSymbols();
 
     printDrvMajorTable( "afd" )
+    printDrvMajorTable( "ntfs" )
 
 if __name__ == "__main__":
     run()
