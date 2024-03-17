@@ -1,66 +1,24 @@
-# Pykd - not only python extension for WinDBG
+# pykd
 
-## Purpose
-This project can help to automate debugging and crash dump analysis using Python. It allows one to take the best from both worlds: the expressiveness and convenience of Python with the power of WinDbg!
+Это форк оригинального проекта pykd и его подпроекта kdlibcpp ([https://github.com/dbhim/kdlibcpp](https://github.com/dbhim/kdlibcpp), [https://gitverse.ru/dbhim/kdlibcpp](https://gitverse.ru/dbhim/kdlibcpp)). Проект сейчас недоступен по изначальному адресу [https://githomelab.ru/pykd/pykd](https://githomelab.ru/pykd/pykd)
 
-## Why do I need this?
-If you want to automate the debugger but dislike the WinDbg built-in script machine syntax it's time to try again using the handy and powerful Python language. Even if you don't want to create your own script, maybe some existing scripts will be of interest to you?
+Одним из авторов проекта является Александр Тарасенко (ussrhero).
+Нашёл несколько доступных проектов пользователя с таким же ником:\
+[https://gitflic.ru/project/ussrhero/pykd-ext.git](https://gitflic.ru/project/ussrhero/pykd-ext.git)\
+[https://gitflic.ru/project/ussrhero/pykd](https://gitflic.ru/project/ussrhero/pykd)\
+[https://gitflic.ru/project/ussrhero/kdlibcpp](https://gitflic.ru/project/ussrhero/kdlibcpp)\
+Последние коммиты в них были в 2020 году.
 
-## Getting started
-* You should have installed python. Supported python: 2.7, 3.5 - 3.9
-* Install pykd with command: 'pip install pykd'
-* Use windbg extension (bootstrapper) to run pykd with windbg
+Также есть несколько форков оригинальных проектов с небольшими дополнениями:\
+[https://github.com/ksmyth/pykd](https://github.com/ksmyth/pykd)\
+[https://github.com/ivellioscolin/kdlibcpp](https://github.com/ivellioscolin/kdlibcpp)\
+[https://github.com/arizvisa/pykd-pykd](https://github.com/arizvisa/pykd-pykd)\
+[https://github.com/arizvisa/pykd-kdlibcpp](https://github.com/arizvisa/pykd-kdlibcpp)
 
-## Windbg extension (bootstarpper)
-Use it to run pykd within windbg.     
-[Home Page](https://githomelab.ru/pykd/pykd-ext)     
-[Download](https://githomelab.ru/pykd/pykd-ext/wikis/Downloads)   
+За основу взял первые два.
 
-## Releases
-Just run 'pip install pykd' to install or 'pip install pykd --upgrade' to upgrade to the last version   
-[PyPi](https://pypi.org/project/pykd)   
-[All Releases](/../wikis/All Releases)  
-
-## Documentation
-[Wiki Home](/../wikis/Home)    
-[User Manual](/../wikis/User Manual rus)    
-[API Reference](/../wikis/API Reference)   
-
-## Useful tools for pykd and WinDBG
-[windbg-pack](https://githomelab.ru/pykd/windbg-pack)    
-Set of python scripts for WinDBG
-
-[pykdwin](https://githomelab.ru/pykd/pykdwin)   
-A library with auxiliary modules for writing small pykd scripts and daily use.
-
-[windbg-kernel](https://githomelab.ru/pykd/windbg-kernel)    
-Set of pykd script for kernel debugging
+Впервые с этим проектом я познакомился в 2015 году на PHDays, на котором Александ Тарасенко делал свой доклад ([youtube](https://www.youtube.com/watch?v=mp336ASI0Ew), [rutube](https://www.youtube.com/watch?v=mp336ASI0Ew)). К сожалению, сейчас проект не поддерживается авторами. Здесь я постарался собрать его в наиболее актуальном состоянии. Актуализировал некоторые примеры.
 
 
-## How to build ?
-* install VS 2017     
-https://visualstudio.microsoft.com/downloads/
 
-* install cmake   
-https://cmake.org/
-
-* install git    
-https://git-scm.com/
-
-* get sources:
-
-```
-git clone --recurse-submodules https://githomelab.ru/pykd/pykd.git local_dir
-```
-* open pykd.sln 
-* choose a python version and a target platform then build pykd projects
-
-## Projects used pykd
-[mona.py](https://github.com/corelan/mona)    
-the exploit writer's swiss army knife
-
-[flare-dbg](https://github.com/fireeye/flare-dbg)    
-flare-dbg is a project meant to aid malware reverse engineers in rapidly developing debugger scripts. 
-
-[voltron](https://github.com/snare/voltron)    
-Voltron is an extensible debugger UI toolkit written in Python
+[README оригинального проекта](./README_orig.md)
