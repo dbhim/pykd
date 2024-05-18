@@ -387,9 +387,7 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_3.9|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros">
-    <NuGetPackageImportStamp>bb9fbdf7</NuGetPackageImportStamp>
-  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_2.7|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <TargetExt>.pyd</TargetExt>
@@ -1019,12 +1017,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;NDEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Python310\include;$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1277,19 +1276,16 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(SolutionDir)\packages\llvm-cmake.6.0.0.1\build\native\llvm-cmake.targets" Condition="Exists('$(SolutionDir)\packages\llvm-cmake.6.0.0.1\build\native\llvm-cmake.targets')" />
     <Import Project="$(SolutionDir)\packages\clang-cmake.6.0.0.1\build\native\clang-cmake.targets" Condition="Exists('$(SolutionDir)\packages\clang-cmake.6.0.0.1\build\native\clang-cmake.targets')" />
-    <Import Project="$(SolutionDir)\packages\boost.1.67.0.0\build\boost.targets" Condition="Exists('$(SolutionDir)\packages\boost.1.67.0.0\build\boost.targets')" />
-    <Import Project="$(SolutionDir)\packages\boost_atomic-src.1.67.0.0\build\boost_atomic-src.targets" Condition="Exists('$(SolutionDir)\packages\boost_atomic-src.1.67.0.0\build\boost_atomic-src.targets')" />
-    <Import Project="$(SolutionDir)\packages\boost_chrono-src.1.67.0.0\build\boost_chrono-src.targets" Condition="Exists('$(SolutionDir)\packages\boost_chrono-src.1.67.0.0\build\boost_chrono-src.targets')" />
-    <Import Project="$(SolutionDir)\packages\boost_date_time-src.1.67.0.0\build\boost_date_time-src.targets" Condition="Exists('$(SolutionDir)\packages\boost_date_time-src.1.67.0.0\build\boost_date_time-src.targets')" />
-    <Import Project="$(SolutionDir)\packages\boost_regex-src.1.67.0.0\build\boost_regex-src.targets" Condition="Exists('$(SolutionDir)\packages\boost_regex-src.1.67.0.0\build\boost_regex-src.targets')" />
-    <Import Project="$(SolutionDir)\packages\boost_system-src.1.67.0.0\build\boost_system-src.targets" Condition="Exists('$(SolutionDir)\packages\boost_system-src.1.67.0.0\build\boost_system-src.targets')" />
-    <Import Project="$(SolutionDir)\packages\boost_thread-src.1.67.0.0\build\boost_thread-src.targets" Condition="Exists('$(SolutionDir)\packages\boost_thread-src.1.67.0.0\build\boost_thread-src.targets')" />
     <Import Project="$(SolutionDir)\packages\Python27.2.7.6\build\python27.targets" Condition="'$(PythonVersion)'=='2.7' AND Exists('$(SolutionDir)\packages\Python27.2.7.6\build\python27.targets')" />
     <Import Project="$(SolutionDir)\packages\Python35.3.5.1.1\build\python35.targets" Condition="'$(PythonVersion)'=='3.5' AND Exists('$(SolutionDir)\packages\Python35.3.5.1.1\build\python35.targets')" />
     <Import Project="$(SolutionDir)\packages\Python36.3.6.0\build\python36.targets" Condition="'$(PythonVersion)'=='3.6' AND Exists('$(SolutionDir)\packages\Python36.3.6.0\build\python36.targets')" />
     <Import Project="$(SolutionDir)\packages\Python37.1.0.0.1\build\python37.targets" Condition="'$(PythonVersion)'=='3.7' AND Exists('$(SolutionDir)\packages\Python37.1.0.0.1\build\python37.targets')" />
     <Import Project="$(SolutionDir)\packages\Python38.3.8.0\build\python38.targets" Condition="'$(PythonVersion)'=='3.8' AND Exists('$(SolutionDir)\packages\Python38.3.8.0\build\python38.targets')" />
     <Import Project="$(SolutionDir)\packages\Python39.3.9.0\build\python39.targets" Condition="'$(PythonVersion)'=='3.9' AND Exists('$(SolutionDir)\packages\Python39.3.9.0\build\python39.targets')" />
+    <Import Project="..\packages\boost.1.85.0\build\boost.targets" Condition="Exists('..\packages\boost.1.85.0\build\boost.targets')" />
+    <Import Project="..\packages\boost_thread-vc141.1.85.0\build\boost_thread-vc141.targets" Condition="Exists('..\packages\boost_thread-vc141.1.85.0\build\boost_thread-vc141.targets')" />
+    <Import Project="..\packages\boost_chrono-vc141.1.85.0\build\boost_chrono-vc141.targets" Condition="Exists('..\packages\boost_chrono-vc141.1.85.0\build\boost_chrono-vc141.targets')" />
+    <Import Project="..\packages\boost_atomic-vc141.1.85.0\build\boost_atomic-vc141.targets" Condition="Exists('..\packages\boost_atomic-vc141.1.85.0\build\boost_atomic-vc141.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -1297,18 +1293,15 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\packages\llvm-cmake.6.0.0.1\build\native\llvm-cmake.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\llvm-cmake.6.0.0.1\build\native\llvm-cmake.targets'))" />
     <Error Condition="!Exists('$(SolutionDir)\packages\clang-cmake.6.0.0.1\build\native\clang-cmake.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\clang-cmake.6.0.0.1\build\native\clang-cmake.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\boost.1.67.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\boost.1.67.0.0\build\boost.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\boost_atomic-src.1.67.0.0\build\boost_atomic-src.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\boost_atomic-src.1.67.0.0\build\boost_atomic-src.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\boost_chrono-src.1.67.0.0\build\boost_chrono-src.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\boost_chrono-src.1.67.0.0\build\boost_chrono-src.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\boost_date_time-src.1.67.0.0\build\boost_date_time-src.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\boost_date_time-src.1.67.0.0\build\boost_date_time-src.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\boost_regex-src.1.67.0.0\build\boost_regex-src.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\boost_regex-src.1.67.0.0\build\boost_regex-src.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\boost_system-src.1.67.0.0\build\boost_system-src.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\boost_system-src.1.67.0.0\build\boost_system-src.targets'))" />
-    <Error Condition="!Exists('$(SolutionDir)\packages\boost_thread-src.1.67.0.0\build\boost_thread-src.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\boost_thread-src.1.67.0.0\build\boost_thread-src.targets'))" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Python27.2.7.6\build\python27.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Python27.2.7.6\build\python27.targets'))" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Python35.3.5.1.1\build\python35.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Python35.3.5.1\build\python35.targets'))" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Python36.3.6.0\build\python36.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Python36.3.6.0\build\python36.targets')" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Python37.1.0.0.1\build\python37.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Python37.1.0.0.1\build\python37.targets')" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Python38.3.8.0\build\python38.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Python38.3.8.0\build\python38.targets')" />
     <Error Condition="!Exists('$(SolutionDir)\packages\Python39.3.9.0\build\python39.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Python39.3.9.0\build\python39.targets')" />
+    <Error Condition="!Exists('..\packages\boost.1.85.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.85.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_thread-vc141.1.85.0\build\boost_thread-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc141.1.85.0\build\boost_thread-vc141.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_chrono-vc141.1.85.0\build\boost_chrono-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc141.1.85.0\build\boost_chrono-vc141.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_atomic-vc141.1.85.0\build\boost_atomic-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_atomic-vc141.1.85.0\build\boost_atomic-vc141.targets'))" />
   </Target>
 </Project>

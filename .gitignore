@@ -1,6 +1,8 @@
 *.pyc
 .vs
+*.user
 pykd.VC*
+obj
 /packages
 /cmake
 /ipch
