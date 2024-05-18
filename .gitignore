@@ -1,2 +1,10 @@
 *.pyc
 .vs
+pykd.VC*
+/packages
+/cmake
+/ipch
+/private
+/out
+x64
+Win32
