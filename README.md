@@ -1,5 +1,8 @@
 # pykd
 
+[https://github.com/dbhim/pykd](https://github.com/dbhim/pykd)\
+[https://gitverse.ru/dbhim/pykd](https://gitverse.ru/dbhim/pykd)
+
 Это форк оригинального проекта pykd и его подпроекта kdlibcpp ([https://github.com/dbhim/kdlibcpp](https://github.com/dbhim/kdlibcpp), [https://gitverse.ru/dbhim/kdlibcpp](https://gitverse.ru/dbhim/kdlibcpp)). Проект сейчас недоступен по изначальному адресу [https://githomelab.ru/pykd/pykd](https://githomelab.ru/pykd/pykd)
 
 Одним из авторов проекта является Александр Тарасенко (ussrhero).
