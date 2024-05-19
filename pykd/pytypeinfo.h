@@ -143,6 +143,12 @@ struct TypeInfoAdapter : public kdlib::TypeInfo {
         return typeInfo.getElementName(index);
     }
 
+	static void setElementName(kdlib::TypeInfo &typeInfo, size_t index, std::wstring name)
+	{
+		AutoRestorePyState  pystate;
+		return typeInfo.setElementName(index, name);
+	}
+
     static kdlib::MEMOFFSET_64 getStaticOffset( kdlib::TypeInfo &typeInfo, const std::wstring &name )
     {
         AutoRestorePyState  pystate;

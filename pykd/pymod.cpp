@@ -950,6 +950,8 @@ void pykd_init()
             "Return True if type has a field with the specified name")
         .def( "fieldName", TypeInfoAdapter::getElementName,
             "Return name of struct field by index" )
+		.def("setFieldName", TypeInfoAdapter::setElementName,
+			"Set name of struct field by index")
         .def( "fields", TypeInfoAdapter::getFields,
             "Return list of tuple ( filedName, fieldType )" )
         .def( "members", TypeInfoAdapter::getMembers,
