@@ -10,3 +10,8 @@ obj
 /out
 x64
 Win32
+
+setup/build/
+setup/dist/
+setup/pykd.egg-info/
+setup/pykd/
