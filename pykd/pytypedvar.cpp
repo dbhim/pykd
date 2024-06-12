@@ -5,9 +5,24 @@
 
 #include "pytypeinfo.h"
 #include "pydataaccess.h"
+#include "kdlib/dataaccessor.h"
 
 
 namespace pykd {
+
+///////////////////////////////////////////////////////////////////////////////
+
+kdlib::TypedVarPtr getTypedVarFromDump(const std::wstring &typeName, kdlib::MEMOFFSET_64 addr, const python::list &list)
+{
+	std::vector<unsigned char> values = listToVector<unsigned char>(list);
+
+	std::wostringstream location;
+
+	location << L"dump_" << typeName << L'_' << std::hex << addr;
+
+	AutoRestorePyState  pystate;
+	return kdlib::loadTypedVar(typeName, kdlib::getDumpAccessor(values, addr, location.str()));
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 

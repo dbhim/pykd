@@ -9,7 +9,7 @@ import itertools
 
 _name = "pykd"
 _desc = "python windbg extension"
-_version = '0.3.4.15'
+_version = '0.3.5.0'
 
 def getReleaseSrc():
     return 'Release_%d.%d' % sys.version_info[0:2]

@@ -16,6 +16,8 @@ namespace python = boost::python;
 
 namespace pykd {
 
+kdlib::TypedVarPtr getTypedVarFromDump(const std::wstring &typeName, kdlib::MEMOFFSET_64 addr, const python::list &list);
+
 kdlib::TypedVarPtr getTypedVarByTypeName(const std::wstring &name, python::object& dataStorage);
 
 inline kdlib::TypedVarPtr getTypedVarByName( const std::wstring &name ) 

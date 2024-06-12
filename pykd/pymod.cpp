@@ -1044,6 +1044,9 @@ void pykd_init()
 #endif
         ;
 
+	python::def("getTypedVarFromDump", pykd::getTypedVarFromDump,
+		"Get typedVar from array of bytes");
+
     python::class_<kdlib::TypedVar, kdlib::TypedVarPtr, python::bases<kdlib::NumConvertable>, boost::noncopyable >("typedVar",
         "Class of non-primitive type object, child class of typeClass. Data from target is copied into object instance", python::no_init  )
         .def("__init__", python::make_constructor(pykd::getTypedVarByName) )
@@ -1075,9 +1078,9 @@ void pykd_init()
         .def("hasField", TypedVarAdapter::hasField,
             "Check if a typedVar object has the specified field")
         .def( "fields", TypedVarAdapter::getFields,
-            "Return list of tuple ( filedName, fieldOffset, fieldValue )" )
+            "Return list of tuple ( fieldName, fieldOffset, fieldValue )" )
         .def ("members", TypedVarAdapter::getMembers,
-            "Return list of tuple ( filedName, fieldOffset, fieldValue )")
+            "Return list of tuple ( fieldName, fieldOffset, fieldValue )")
         .def( "fieldName", TypedVarAdapter::getElementName,
             "Return name of struct field by index" )
         .def("method", TypedVarAdapter::getMethodByName, ( python::arg("name"), python::arg("prototype") = "" ),

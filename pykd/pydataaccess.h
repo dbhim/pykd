@@ -32,189 +32,194 @@ public:
 
 public:
 
-    virtual size_t getLength() const {
+    size_t getLength() const final {
         AutoSavePythonState  pystate(&m_pystate);
         return python::len(m_object);
     }
 
-    virtual unsigned char readByte(size_t pos=0) const {
+    unsigned char readByte(size_t pos = 0) const final  {
         return readValue<unsigned char>(pos);
     }
 
-    virtual void writeByte(unsigned char value, size_t pos=0) {
+    void writeByte(unsigned char value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual char readSignByte(size_t pos=0) const {
+    char readSignByte(size_t pos=0) const final {
         return readValue<char>(pos);
     }
 
-    virtual void writeSignByte(char value, size_t pos=0) {
+    void writeSignByte(char value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual unsigned short readWord(size_t pos=0) const {
+    unsigned short readWord(size_t pos = 0) const final  {
         return readValue<unsigned short>(pos);
     }
 
-    virtual void writeWord(unsigned short value, size_t pos=0) {
+    void writeWord(unsigned short value, size_t pos = 0) final  {
         writeValue(value,pos);
     }
 
-    virtual short readSignWord(size_t pos=0) const {
+    short readSignWord(size_t pos = 0) const final {
         return readValue<short>(pos);
     }
 
-    virtual void writeSignWord(short value, size_t pos=0) {
+    void writeSignWord(short value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual unsigned long readDWord(size_t pos=0) const {
+    unsigned long readDWord(size_t pos = 0) const final {
         return readValue<unsigned long>(pos);
     }
 
-    virtual void writeDWord(unsigned long value, size_t pos=0) {
+    void writeDWord(unsigned long value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual long readSignDWord(size_t pos=0) const  {
+    long readSignDWord(size_t pos = 0) const final {
         return readValue<long>(pos);
     }
 
-    virtual void writeSignDWord(long value, size_t pos=0) {
+    void writeSignDWord(long value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual unsigned long long readQWord(size_t pos=0) const  {
+    unsigned long long readQWord(size_t pos = 0) const final {
           return readValue<unsigned long long>(pos);
     }
 
-    virtual void writeQWord(unsigned long long value, size_t pos=0)  {
+    void writeQWord(unsigned long long value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual long long readSignQWord(size_t pos=0) const {
+    long long readSignQWord(size_t pos = 0) const final {
         return readValue<long long>(pos);
     }
 
-    virtual void writeSignQWord(long long value, size_t pos=0) {
+    void writeSignQWord(long long value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual float readFloat(size_t pos=0) const {
+    float readFloat(size_t pos = 0) const final {
         return readValue<float>(pos);
     }
 
-    virtual void writeFloat(float value, size_t pos=0) {
+    void writeFloat(float value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual double readDouble(size_t pos=0) const {
+    double readDouble(size_t pos = 0) const final {
         return readValue<double>(pos);
     }
 
-    virtual void writeDouble(double value, size_t pos=0) {
+    void writeDouble(double value, size_t pos = 0) final {
         writeValue(value,pos);
     }
 
-    virtual void readBytes( std::vector<unsigned char>&  dataRange, size_t count, size_t pos=0) const {
+    void readBytes( std::vector<unsigned char>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeBytes( const std::vector<unsigned char>&  dataRange, size_t pos=0) {
+    void writeBytes( const std::vector<unsigned char>& dataRange, size_t pos = 0) final {
         writeValues(dataRange,pos);
     }
 
-    void readWords( std::vector<unsigned short>&  dataRange, size_t count, size_t  pos) const {
+    void readWords( std::vector<unsigned short>& dataRange, size_t count, size_t pos) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeWords( const std::vector<unsigned short>&  dataRange, size_t pos=0) {
+    void writeWords( const std::vector<unsigned short>& dataRange, size_t pos = 0) final {
         writeValues(dataRange,pos);
     }
 
-    virtual void readDWords( std::vector<unsigned long>&  dataRange, size_t count, size_t  pos=0) const  {
+    void readDWords( std::vector<unsigned long>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeDWords( const std::vector<unsigned long>&  dataRange, size_t  pos=0)  {
+    void writeDWords( const std::vector<unsigned long>& dataRange, size_t pos = 0) final {
         writeValues(dataRange,pos);
     }
 
-    virtual void readQWords( std::vector<unsigned long long>&  dataRange, size_t count, size_t  pos=0) const  {
+    void readQWords( std::vector<unsigned long long>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeQWords( const std::vector<unsigned long long>&  dataRange, size_t  pos=0)  {
+    void writeQWords( const std::vector<unsigned long long>& dataRange, size_t pos = 0) final {
         writeValues(dataRange,pos);
     }
 
-    virtual void readSignBytes( std::vector<char>&  dataRange, size_t count, size_t  pos=0) const {
+    void readSignBytes( std::vector<char>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeSignBytes( const std::vector<char>&  dataRange, size_t  pos=0)  {
+    void writeSignBytes( const std::vector<char>& dataRange, size_t pos = 0) final {
         writeValues(dataRange,pos);
     }
 
-    virtual void readSignWords( std::vector<short>&  dataRange, size_t count, size_t  pos=0) const  {
+    void readSignWords( std::vector<short>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeSignWords( const std::vector<short>&  dataRange, size_t  pos=0)  {
+    void writeSignWords( const std::vector<short>& dataRange, size_t pos = 0) final {
         writeValues(dataRange,pos);
     }
 
-    virtual void readSignDWords( std::vector<long>&  dataRange, size_t count, size_t  pos=0)  const {
+    void readSignDWords( std::vector<long>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeSignDWords( const std::vector<long>&  dataRange, size_t  pos=0) {
+    void writeSignDWords( const std::vector<long>& dataRange, size_t pos = 0) final {
         writeValues(dataRange, pos);
     }
 
-    virtual void readSignQWords( std::vector<long long>&  dataRange, size_t count, size_t  pos=0) const {
+    void readSignQWords( std::vector<long long>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeSignQWords( const std::vector<long long>&  dataRange, size_t  pos=0) {
+    void writeSignQWords( const std::vector<long long>& dataRange, size_t pos = 0) final {
         writeValues(dataRange,pos);
     }
 
-    virtual void readFloats( std::vector<float>&  dataRange, size_t count, size_t  pos=0) const {
+    void readFloats( std::vector<float>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeFloats( const std::vector<float>&  dataRange, size_t  pos=0) {
+    void writeFloats( const std::vector<float>& dataRange, size_t pos = 0) final {
         writeValues(dataRange, pos);
     }
 
-    virtual void readDoubles( std::vector<double>&  dataRange, size_t count, size_t  pos=0) const {
+    void readDoubles( std::vector<double>& dataRange, size_t count, size_t pos = 0) const final {
         readValues(dataRange, count, pos);
     }
 
-    virtual void writeDoubles( const std::vector<double>&  dataRange, size_t  pos=0) {
+    void writeDoubles( const std::vector<double>& dataRange, size_t pos = 0) final {
         writeValues(dataRange, pos);
     }
 
-    virtual kdlib::DataAccessorPtr copy( size_t  startOffset = 0, size_t  length = 0 ) {
+    kdlib::DataAccessorPtr nestedCopy( size_t startOffset = 0, size_t length = 0 ) final {
         AutoSavePythonState  pystate(&m_pystate);
         return kdlib::DataAccessorPtr( new PythonObjectAccessor(m_object, startOffset) );
     }
 
-    virtual std::wstring getLocationAsStr() const {
+	kdlib::DataAccessorPtr externalCopy(size_t startOffset = 0, size_t length = 0) final {
+		AutoSavePythonState  pystate(&m_pystate);
+		return kdlib::DataAccessorPtr(new PythonObjectAccessor(m_object, startOffset));
+	}
+
+    std::wstring getLocationAsStr() const final {
         return L"python byte sequance";
     }
 
-    virtual kdlib::MEMOFFSET_64 getAddress() const {
+    kdlib::MEMOFFSET_64 getAddress() const final {
         throw kdlib::DbgException("python accessor error");
     }
 
-    virtual kdlib::VarStorage getStorageType() const {
+    kdlib::VarStorage getStorageType() const final {
         throw kdlib::DbgException("python accessor error");
     }
 
-    virtual std::wstring getRegisterName() const {
+    std::wstring getRegisterName() const final {
         throw kdlib::DbgException("python accessor error");
     }
 
