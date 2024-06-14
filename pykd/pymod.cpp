@@ -106,6 +106,7 @@ BOOST_PYTHON_FUNCTION_OVERLOADS( TypeInfo_ptrTo, TypeInfoAdapter::ptrTo, 1, 2 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( getTypeFromSource_, pykd::getTypeFromSource, 2, 3 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( getTypeInfoProviderFromPdb_, pykd::getTypeInfoProviderFromPdb, 1, 2 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( getTypeInfoProviderFromSource_, pykd::getTypeInfoProviderFromSource, 1, 2);
+BOOST_PYTHON_FUNCTION_OVERLOADS( getTypeInfoProviderFromSourceEx_, pykd::getTypeInfoProviderFromSourceEx, 1, 2);
 BOOST_PYTHON_FUNCTION_OVERLOADS( getSymbolProviderFromSource_, pykd::getSymbolProviderFromSource, 1, 2);
 BOOST_PYTHON_FUNCTION_OVERLOADS(evalExpr_, pykd::evalExpr, 1, 3);
 
@@ -455,6 +456,8 @@ void pykd_init()
         "Create typeInfo class from C/C++ source code") );
     python::def( "getTypeInfoProviderFromSource", &pykd::getTypeInfoProviderFromSource, getTypeInfoProviderFromSource_( python::args("sourceCode", "compileOptions"),
         "Create typeInfo provider from C/C++ source code") );
+	python::def("getTypeInfoProviderFromSourceEx", &pykd::getTypeInfoProviderFromSourceEx, getTypeInfoProviderFromSourceEx_(python::args("sourceCode", "compileOptions"),
+		"Create typeInfo provider from C/C++ source code"));
     python::def( "getTypeInfoProviderFromPdb", &pykd::getTypeInfoProviderFromPdb, getTypeInfoProviderFromPdb_( python::args("filePath", "baseOffset"),
         "Create typeInfo provider from pdb file") );
     python::def("getSymbolProviderFromSource", &pykd::getSymbolProviderFromSource, getSymbolProviderFromSource_(python::args("sourceCode", "compileOptions"),

@@ -3,9 +3,14 @@
 #include <comutil.h>
 
 #include "kdlib/typeinfo.h"
+#include "kdlib/strconvert.h"
 
 #include "pythreadstate.h"
 #include "dbgexcept.h"
+#include "pydbgio.h"
+
+
+
 
 namespace pykd {
 
@@ -66,13 +71,45 @@ inline kdlib::TypeInfoPtr getTypeFromSource( const std::wstring& sourceCode, con
 inline kdlib::TypeInfoProviderPtr getTypeInfoProviderFromSource(const std::wstring& sourceCode, const std::wstring& compileOptions=L"")
 {
     AutoRestorePyState  pystate;
-    return kdlib::getTypeInfoProviderFromSource(sourceCode, compileOptions);
+	std::string errorOutput;
+	kdlib::TypeInfoProviderPtr ret = kdlib::getTypeInfoProviderFromSource(sourceCode, errorOutput, compileOptions);
+
+	if (errorOutput.size()) {
+		std::wstring errorOutputWstring = kdlib::strToWStr(errorOutput); //(errorOutput.begin(), errorOutput.end());
+		kdlib::dprint(errorOutputWstring);
+	}
+
+	return ret;
+}
+
+inline python::tuple getTypeInfoProviderFromSourceEx(const std::wstring& sourceCode, const std::wstring& compileOptions = L"")
+{
+	kdlib::TypeInfoProviderPtr ret;
+	std::string errorOutput;
+
+	do {
+		AutoRestorePyState  pystate;
+		ret = kdlib::getTypeInfoProviderFromSource(sourceCode, errorOutput, compileOptions);
+	} while (false);
+
+	//python::list retList;
+	//retList.append(ret);
+	//retList.append(kdlib::strToWStr(errorOutput));
+	//return retList;
+	return python::make_tuple(ret, kdlib::strToWStr(errorOutput));
 }
 
 inline kdlib::SymbolProviderPtr getSymbolProviderFromSource(const std::wstring& sourceCode, const std::wstring& compileOptions = L"")
 {
     AutoRestorePyState  pystate;
-    return kdlib::getSymbolProviderFromSource(sourceCode, compileOptions);
+	std::string errorOutput;
+    kdlib::SymbolProviderPtr ret = kdlib::getSymbolProviderFromSource(sourceCode, errorOutput, compileOptions);
+	if (errorOutput.size()) {
+		std::wstring errorOutputWstring = kdlib::strToWStr(errorOutput);
+		kdlib::dprint(errorOutputWstring);
+	}
+
+	return ret;
 }
 
 inline kdlib::TypeInfoProviderPtr getTypeInfoProviderFromPdb(const std::wstring&  fileName, kdlib::MEMOFFSET_64 offset = 0UL)
