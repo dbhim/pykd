@@ -12,7 +12,16 @@ namespace pykd {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-kdlib::TypedVarPtr getTypedVarFromDump(const std::wstring &typeName, kdlib::MEMOFFSET_64 addr, const python::list &list)
+kdlib::DataAccessorPtr getDumpAccessor (kdlib::MEMOFFSET_64 addr, const python::list &listValues, const std::wstring &locationName)
+{
+	std::vector<unsigned char> vectorValues = listToVector<unsigned char>(listValues);
+
+	return kdlib::getDumpAccessor(vectorValues, addr, locationName);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+kdlib::TypedVarPtr getTypedVarFromDumpByTypeName(const std::wstring &typeName, kdlib::MEMOFFSET_64 addr, const python::list &list)
 {
 	std::vector<unsigned char> values = listToVector<unsigned char>(list);
 
@@ -24,6 +33,34 @@ kdlib::TypedVarPtr getTypedVarFromDump(const std::wstring &typeName, kdlib::MEMO
 	return kdlib::loadTypedVar(typeName, kdlib::getDumpAccessor(values, addr, location.str()));
 }
 
+
+kdlib::TypedVarPtr getTypedVarFromDumpByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::MEMOFFSET_64 addr, const python::list &list)
+{
+	std::vector<unsigned char> values = listToVector<unsigned char>(list);
+
+	std::wostringstream location;
+
+	location << L"dump_" << typeInfo->getName() << L'_' << std::hex << addr;
+
+	AutoRestorePyState  pystate;
+	return kdlib::loadTypedVar(typeInfo, kdlib::getDumpAccessor(values, addr, location.str()));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+kdlib::TypedVarPtr getTypedVarFromAccessorByTypeName(const std::wstring &typeName, kdlib::DataAccessorPtr dataAccessor)
+{
+	AutoRestorePyState  pystate;
+	return kdlib::loadTypedVar(typeName, dataAccessor);
+}
+
+
+kdlib::TypedVarPtr getTypedVarFromAccessorByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::DataAccessorPtr dataAccessor)
+{
+	AutoRestorePyState  pystate;
+	return kdlib::loadTypedVar(typeInfo, dataAccessor);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 kdlib::TypedVarPtr getTypedVarByTypeName(const std::wstring &name, python::object& dataStorage)
@@ -31,15 +68,15 @@ kdlib::TypedVarPtr getTypedVarByTypeName(const std::wstring &name, python::objec
     python::extract<kdlib::MEMOFFSET_64>  get_addr(dataStorage);
     if ( get_addr.check() )
     {
-        kdlib::MEMOFFSET_64   offset = get_addr();
-        AutoRestorePyState  pystate;
+        kdlib::MEMOFFSET_64 offset = get_addr();
+        AutoRestorePyState pystate;
         return kdlib::loadTypedVar( name, offset );
     }
 
-    kdlib::DataAccessorPtr   dataAceesor( new PythonObjectAccessor(dataStorage) );
+    kdlib::DataAccessorPtr dataAccesor( new PythonObjectAccessor(dataStorage) );
 
-    AutoRestorePyState  pystate;
-    return kdlib::loadTypedVar(name, dataAceesor );
+    AutoRestorePyState pystate;
+    return kdlib::loadTypedVar(name, dataAccesor);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

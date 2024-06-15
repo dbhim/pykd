@@ -112,6 +112,8 @@ BOOST_PYTHON_FUNCTION_OVERLOADS(evalExpr_, pykd::evalExpr, 1, 3);
 
 BOOST_PYTHON_FUNCTION_OVERLOADS( addSyntheticModule_, pykd::addSyntheticModule, 3, 4 );
 
+BOOST_PYTHON_FUNCTION_OVERLOADS(getDumpAccessor_, pykd::getDumpAccessor, 2, 3);
+
 namespace pykd {
 
 void initialize()
@@ -1038,17 +1040,19 @@ void pykd_init()
 #endif
         ;
 
-    python::class_<TypedVarIterator>("typedVarIterator", "iterator for typedVar array", python::no_init)
-        .def("__iter__", &TypedVarIterator::self)
+	python::class_<TypedVarIterator>("typedVarIterator", "iterator for typedVar array", python::no_init)
+		.def("__iter__", &TypedVarIterator::self)
 #if PY_VERSION_HEX < 0x03000000
-        .def("next", &TypedVarIterator::next)
+		.def("next", &TypedVarIterator::next)
 #else
-        .def("__next__", &TypedVarIterator::next)
+		.def("__next__", &TypedVarIterator::next)
 #endif
-        ;
+		;
 
-	python::def("getTypedVarFromDump", pykd::getTypedVarFromDump,
-		"Get typedVar from array of bytes");
+	python::class_<kdlib::DataAccessorPtr>("DataAccessor", "Class DataAccessor typeInfo", python::no_init);
+
+	python::def("getDumpAccessor", pykd::getDumpAccessor, getDumpAccessor_(python::args("addr", "listValues, locationName"),
+		"Get DumpAccessor from array of bytes"));
 
     python::class_<kdlib::TypedVar, kdlib::TypedVarPtr, python::bases<kdlib::NumConvertable>, boost::noncopyable >("typedVar",
         "Class of non-primitive type object, child class of typeClass. Data from target is copied into object instance", python::no_init  )
@@ -1056,6 +1060,10 @@ void pykd_init()
         .def("__init__", python::make_constructor(pykd::getTypedVarByTypeName) )
         .def("__init__", python::make_constructor(pykd::getTypedVarByTypeInfo) )
         .def("__init__", python::make_constructor(pykd::getTypedVarWithPrototype) )
+        .def("__init__", python::make_constructor(pykd::getTypedVarFromDumpByTypeName) )
+        .def("__init__", python::make_constructor(pykd::getTypedVarFromDumpByTypeInfo) )
+        .def("__init__", python::make_constructor(pykd::getTypedVarFromAccessorByTypeName) )
+        .def("__init__", python::make_constructor(pykd::getTypedVarFromAccessorByTypeInfo) )
         .def("getLocation", TypedVarAdapter::getLocation,
             "Return location of the variable")
         .def("getAddress", TypedVarAdapter::getAddress, 

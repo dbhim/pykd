@@ -16,7 +16,13 @@ namespace python = boost::python;
 
 namespace pykd {
 
-kdlib::TypedVarPtr getTypedVarFromDump(const std::wstring &typeName, kdlib::MEMOFFSET_64 addr, const python::list &list);
+kdlib::DataAccessorPtr getDumpAccessor(kdlib::MEMOFFSET_64 addr, const python::list &listValues, const std::wstring &locationName = L"dump");
+
+kdlib::TypedVarPtr getTypedVarFromDumpByTypeName(const std::wstring &typeName, kdlib::MEMOFFSET_64 addr, const python::list &list);
+kdlib::TypedVarPtr getTypedVarFromDumpByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::MEMOFFSET_64 addr, const python::list &list);
+
+kdlib::TypedVarPtr getTypedVarFromAccessorByTypeName(const std::wstring &typeName, kdlib::DataAccessorPtr dataAccessor);
+kdlib::TypedVarPtr getTypedVarFromAccessorByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::DataAccessorPtr dataAccessor);
 
 kdlib::TypedVarPtr getTypedVarByTypeName(const std::wstring &name, python::object& dataStorage);
 
@@ -33,8 +39,6 @@ inline kdlib::TypedVarPtr getTypedVarWithPrototype( const std::wstring &name, co
     AutoRestorePyState  pystate;
     return kdlib::loadTypedVar(name, prototype);
 }
-
-kdlib::TypedVarPtr getTypedVarByTypeNameWithBuffer(const std::wstring& name, python::object &bytes);
 
 python::list getTypedVarListByTypeName( kdlib::MEMOFFSET_64 offset, const std::wstring &typeName, const std::wstring &fieldName );
 python::list getTypedVarListByType( kdlib::MEMOFFSET_64 offset, kdlib::TypeInfoPtr &typeInfo, const std::wstring &fieldName );
