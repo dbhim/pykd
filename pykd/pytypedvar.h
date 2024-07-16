@@ -16,13 +16,14 @@ namespace python = boost::python;
 
 namespace pykd {
 
-kdlib::DataAccessorPtr getDumpAccessor(kdlib::MEMOFFSET_64 addr, const python::list &listValues, const std::wstring &locationName = L"dump");
+kdlib::DataAccessorPtr getDumpAccessor(const python::list &listValues, kdlib::MEMOFFSET_64 addr = 0, const std::wstring &locationName = L"dump");
+kdlib::DataAccessorWrapperPtr getDumpAccessorWrapper(const python::list &listValues, kdlib::MEMOFFSET_64 addr = 0, const std::wstring &locationName = L"dump");
 
 kdlib::TypedVarPtr getTypedVarFromDumpByTypeName(const std::wstring &typeName, kdlib::MEMOFFSET_64 addr, const python::list &list);
 kdlib::TypedVarPtr getTypedVarFromDumpByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::MEMOFFSET_64 addr, const python::list &list);
 
-kdlib::TypedVarPtr getTypedVarFromAccessorByTypeName(const std::wstring &typeName, kdlib::DataAccessorPtr dataAccessor);
-kdlib::TypedVarPtr getTypedVarFromAccessorByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::DataAccessorPtr dataAccessor);
+kdlib::TypedVarPtr getTypedVarFromAccessorByTypeName(const std::wstring &typeName, kdlib::DataAccessorWrapperPtr dataAccessor);
+kdlib::TypedVarPtr getTypedVarFromAccessorByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::DataAccessorWrapperPtr dataAccessor);
 
 kdlib::TypedVarPtr getTypedVarByTypeName(const std::wstring &name, python::object& dataStorage);
 

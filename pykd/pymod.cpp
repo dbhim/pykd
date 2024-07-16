@@ -113,6 +113,7 @@ BOOST_PYTHON_FUNCTION_OVERLOADS(evalExpr_, pykd::evalExpr, 1, 3);
 BOOST_PYTHON_FUNCTION_OVERLOADS( addSyntheticModule_, pykd::addSyntheticModule, 3, 4 );
 
 BOOST_PYTHON_FUNCTION_OVERLOADS(getDumpAccessor_, pykd::getDumpAccessor, 2, 3);
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(getDataAccessorNestedCopy_, kdlib::DataAccessorWrapper::nestedCopy, 1, 2);
 
 namespace pykd {
 
@@ -1049,7 +1050,13 @@ void pykd_init()
 #endif
 		;
 
-	python::class_<kdlib::DataAccessorPtr>("DataAccessor", "Class DataAccessor typeInfo", python::no_init);
+	python::class_<kdlib::DataAccessorWrapper, kdlib::DataAccessorWrapperPtr, python::bases<kdlib::NumConvertable>, boost::noncopyable>("dataAccessor", "Class DataAccessor wrapper", python::no_init)
+	//python::class_<kdlib::DataAccessor, kdlib::DataAccessorPtr, python::bases<kdlib::NumConvertable>, boost::noncopyable>("DataAccessor", "Class DataAccessor typeInfo", python::no_init)
+	//python::class_<kdlib::TypedVar, kdlib::TypedVarPtr, python::bases<kdlib::NumConvertable>, boost::noncopyable >("typedVar", "Class of non-primitive type object, child class of typeClass. Data from target is copied into object instance", python::no_init)
+		
+		.def("__init__", python::make_constructor(pykd::getDumpAccessorWrapper))
+		.def("nestedCopy", &kdlib::DataAccessorWrapper::nestedCopy, getDataAccessorNestedCopy_(python::args("startOffset, length"),
+			"Get nested copy of DataAccessor"));
 
 	python::def("getDumpAccessor", pykd::getDumpAccessor, getDumpAccessor_(python::args("addr", "listValues, locationName"),
 		"Get DumpAccessor from array of bytes"));

@@ -946,6 +946,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;_DEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -954,8 +955,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(OutDir)..\Debug\targetapp.exe $(OutDir)</Command>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -970,6 +970,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;_DEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Python310\include;$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -978,8 +979,7 @@
       <AdditionalLibraryDirectories>C:\Python310\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(OutDir)..\Debug\targetapp.exe $(OutDir)</Command>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -994,16 +994,17 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;_DEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Python311\include;$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <ModuleDefinitionFile>pykd.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>C:\Python311\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(OutDir)..\Debug\targetapp.exe $(OutDir)</Command>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -1018,6 +1019,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;_DEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Python312\include;$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1026,8 +1028,7 @@
       <AdditionalLibraryDirectories>C:\Python312\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(OutDir)..\Debug\targetapp.exe $(OutDir)</Command>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -1042,6 +1043,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;_DEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1050,8 +1052,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(OutDir)..\Debug\targetapp.exe $(OutDir)</Command>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -1066,6 +1067,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;_DEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1074,8 +1076,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(OutDir)..\Debug\targetapp.exe $(OutDir)</Command>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -1090,6 +1091,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;_DEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1098,8 +1100,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(OutDir)..\Debug\targetapp.exe $(OutDir)</Command>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -1114,6 +1115,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;_DEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1122,8 +1124,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(OutDir)..\Debug\targetapp.exe $(OutDir)</Command>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -1332,6 +1333,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;NDEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1357,6 +1359,7 @@
       <AdditionalIncludeDirectories>C:\Python310\include;$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1382,6 +1385,7 @@
       <AdditionalIncludeDirectories>C:\Python311\include;$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1405,6 +1409,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;NDEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);BOOST_PYTHON_NUMPY_INTERNAL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Python312\include;$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1429,6 +1434,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;NDEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1453,6 +1459,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;NDEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1477,6 +1484,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;NDEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -1501,6 +1509,7 @@
       <PreprocessorDefinitions>WIN32;BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;NDEBUG;_WINDOWS;_USRDLL;PYKD_EXPORTS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\kdlibcpp\kdlib\include;$(SolutionDir)\numpy\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

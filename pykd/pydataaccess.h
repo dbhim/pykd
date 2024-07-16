@@ -1,6 +1,5 @@
 #pragma once 
 
-
 #include "boost/python/object.hpp"
 #include "boost/python/wrapper.hpp"
 
@@ -24,7 +23,7 @@ class PythonObjectAccessor  : public kdlib::DataAccessor
 
 public:
 
-    PythonObjectAccessor(python::object&  obj, size_t  pos = 0) : m_object(obj) 
+    PythonObjectAccessor(python::object& obj, size_t pos = 0) : m_object(obj) 
     {
         m_pystate = PyThreadState_Get();
         m_startPos = pos;
@@ -199,12 +198,17 @@ public:
 
     kdlib::DataAccessorPtr nestedCopy( size_t startOffset = 0, size_t length = 0 ) final {
         AutoSavePythonState  pystate(&m_pystate);
-        return kdlib::DataAccessorPtr( new PythonObjectAccessor(m_object, startOffset) );
+        return kdlib::DataAccessorPtr( new PythonObjectAccessor(m_object, m_startPos + startOffset) );
     }
 
-	kdlib::DataAccessorPtr externalCopy(size_t startOffset = 0, size_t length = 0) final {
+	kdlib::DataAccessorPtr externalCopy(kdlib::MEMOFFSET_64 startAddr = 0, size_t length = 0) final {
 		AutoSavePythonState  pystate(&m_pystate);
-		return kdlib::DataAccessorPtr(new PythonObjectAccessor(m_object, startOffset));
+		return kdlib::DataAccessorPtr(new PythonObjectAccessor(m_object, startAddr));
+	}
+
+	virtual bool checkRange(kdlib::MEMOFFSET_64 startAddr, size_t length) const
+	{
+		return startAddr >= m_startPos;
 	}
 
     std::wstring getLocationAsStr() const final {

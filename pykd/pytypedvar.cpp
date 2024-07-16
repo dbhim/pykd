@@ -12,11 +12,17 @@ namespace pykd {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-kdlib::DataAccessorPtr getDumpAccessor (kdlib::MEMOFFSET_64 addr, const python::list &listValues, const std::wstring &locationName)
+kdlib::DataAccessorPtr getDumpAccessor (const python::list &listValues, kdlib::MEMOFFSET_64 addr, const std::wstring &locationName)
 {
 	std::vector<unsigned char> vectorValues = listToVector<unsigned char>(listValues);
 
 	return kdlib::getDumpAccessor(vectorValues, addr, locationName);
+}
+
+kdlib::DataAccessorWrapperPtr getDumpAccessorWrapper(const python::list &listValues, kdlib::MEMOFFSET_64 addr, const std::wstring &locationName)
+{
+
+	return kdlib::DataAccessorWrapperPtr(new kdlib::DataAccessorWrapper(getDumpAccessor(listValues, addr, locationName)));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -48,17 +54,17 @@ kdlib::TypedVarPtr getTypedVarFromDumpByTypeInfo(const kdlib::TypeInfoPtr &typeI
 
 ///////////////////////////////////////////////////////////////////////////////
 
-kdlib::TypedVarPtr getTypedVarFromAccessorByTypeName(const std::wstring &typeName, kdlib::DataAccessorPtr dataAccessor)
+kdlib::TypedVarPtr getTypedVarFromAccessorByTypeName(const std::wstring &typeName, kdlib::DataAccessorWrapperPtr dataAccessor)
 {
 	AutoRestorePyState  pystate;
-	return kdlib::loadTypedVar(typeName, dataAccessor);
+	return kdlib::loadTypedVar(typeName, dataAccessor->get());
 }
 
 
-kdlib::TypedVarPtr getTypedVarFromAccessorByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::DataAccessorPtr dataAccessor)
+kdlib::TypedVarPtr getTypedVarFromAccessorByTypeInfo(const kdlib::TypeInfoPtr &typeInfo, kdlib::DataAccessorWrapperPtr dataAccessor)
 {
 	AutoRestorePyState  pystate;
-	return kdlib::loadTypedVar(typeInfo, dataAccessor);
+	return kdlib::loadTypedVar(typeInfo, dataAccessor->get());
 }
 
 ///////////////////////////////////////////////////////////////////////////////

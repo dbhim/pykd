@@ -6,6 +6,22 @@ import unittest
 import target
 import pykd
 
+
+typesSourceCode = '''
+
+typedef struct _LIST_ENTRY {
+    struct _LIST_ENTRY *Flink;
+    struct _LIST_ENTRY *Blink;
+} _LIST_ENTRY;
+
+typedef struct _StructArray {
+    int size;
+    unsigned char buf[3];
+} StructArray;
+    
+'''
+
+
 class TypedVarTest( unittest.TestCase ):
 
     def testCtor( self ):
@@ -502,3 +518,29 @@ class TypedVarTest( unittest.TestCase ):
         self.assertTrue(var.hasMethod("virtMethod1"))
         self.assertFalse(var.hasMethod("notExist"))
         
+    def testDumpAccessor(self):
+        typesProvider = pykd.getTypeInfoProviderFromSource (typesSourceCode)
+        ti = typesProvider.getTypeByName('_LIST_ENTRY')
+        a = pykd.typedVar (ti, 0, [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+        b = a.Flink
+        self.assertEqual (a.Flink, 1)
+        self.assertEqual (a.Blink, 0)
+        self.assertEqual (b.Flink, 0)
+        self.assertEqual (b.Blink, 0)
+        self.assertEqual (b.Flink.Flink, 1)
+        self.assertEqual (b.Flink.Flink.Flink, 0)
+        self.assertEqual (b.Flink.Flink.Flink.Flink, 1)
+
+        dumpAccessor = pykd.dataAccessor ([0,1,2,3,4,5,6,7,8,0,0,0,0,0,0,0,0,0], 0x0807060504030200, "list_entry_dump")
+        
+        s = pykd.typedVar (typesProvider.getTypeByName('StructArray'), dumpAccessor.nestedCopy(1))
+        self.assertEqual (s.size, 0x04030201)
+        self.assertEqual (s.buf[0], 5)
+        self.assertEqual (s.buf[1], 6)
+
+        a = pykd.typedVar (typesProvider.getTypeByName('_LIST_ENTRY'), dumpAccessor.nestedCopy(1))
+        b = a.Flink
+        self.assertEqual (b, 0x0807060504030201)
+        self.assertEqual (b.Flink, 0x0807060504030201)
+        self.assertEqual (b.Flink.Flink, 0x0807060504030201)
+        self.assertEqual (b.Flink.Flink.Flink, 0x0807060504030201)

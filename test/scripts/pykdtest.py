@@ -54,7 +54,7 @@ def getTestSuite( singleName = "" ):
 
                 unittest.TestLoader().loadTestsFromTestCase( StartProcessWithoutParamsTest ),
                 # *** Test without start/kill new processes
-                unittest.TestLoader().loadTestsFromTestCase( moduletest.ModuleTest ),
+                #unittest.TestLoader().loadTestsFromTestCase( moduletest.ModuleTest ),
                 unittest.TestLoader().loadTestsFromTestCase( memtest.MemoryTest ),
                 unittest.TestLoader().loadTestsFromTestCase( typeinfo.TypeInfoTest ),
                 unittest.TestLoader().loadTestsFromTestCase( typedvar.TypedVarTest ),

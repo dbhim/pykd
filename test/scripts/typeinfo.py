@@ -6,6 +6,16 @@ import unittest
 import target
 import pykd
 
+typesSourceCode = '''
+
+typedef struct _LIST_ENTRY {
+    struct _LIST_ENTRY *Flink;
+    struct _LIST_ENTRY *Blink;
+} _LIST_ENTRY;
+    
+'''
+
+
 class TypeInfoTest( unittest.TestCase ):
 
     def testCtor( self ):
@@ -390,3 +400,15 @@ class TypeInfoTest( unittest.TestCase ):
     #    symbolEnum = pykd.getSymbolProviderFromSource(src_code, compile_opts)
     #    for symName, _, symType in symbolEnum :
     #        print( symName, symType.name() )
+
+    def testClangCompile(self):
+        typesProvider = pykd.getTypeInfoProviderFromSource(typesSourceCode)
+        ti = typesProvider.getTypeByName('_LIST_ENTRY')
+        self.assertEqual (ti.name(), '_LIST_ENTRY')
+        self.assertEqual (ti.Flink.name(), '_LIST_ENTRY*')
+        self.assertEqual (ti.Flink.deref().name(), '_LIST_ENTRY')
+        self.assertEqual (ti.Blink.name(), '_LIST_ENTRY*')
+        self.assertEqual (ti.Blink.deref().name(), '_LIST_ENTRY')
+
+        (typesProvider, outMsg) = pykd.getTypeInfoProviderFromSourceEx('1; abc; ', "-w")
+        self.assertTrue ('abc' in outMsg)
